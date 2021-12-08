@@ -1,6 +1,6 @@
 import React from "react";
-import "components/InterviewerListItem.scss"
-import className from 'classnames'
+import "components/InterviewerListItem.scss";
+import className from 'classnames';
 
 const InterviewerListItem = ({id, name, avatar, setInterviewer, selected}) => {
 
