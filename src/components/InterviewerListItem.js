@@ -1,15 +1,20 @@
 import React from "react";
 import "components/InterviewerListItem.scss"
 
-const InterviewerListItem = () => {
+const InterviewerListItem = ({id, name, avatar, setInterviewer}) => {
+
+  const setInterviewerClick = (id) => {
+    return setInterviewer(id);
+  }
+
   return (
-    <li className="interviewes__item">
+    <li className="interviewes__item" onClick={setInterviewerClick(id)}>
       <img
         className="interviewes__item-image"
-        src="https://i.imgur.com/LpaY82x.png"
-        alt="Sylvia Palmer"
+        src={avatar}
+        alt={name}
       />
-      Sylvia Palmer
+      {name}
     </li>
   )
 }
