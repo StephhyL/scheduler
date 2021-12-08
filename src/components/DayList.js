@@ -9,7 +9,7 @@ const DayList = ({days, day, setDay}) => {
       name={dayObj.name}
       spots={dayObj.spots}
       selected={dayObj.name === day}
-      setDay={setDay}
+      onChange={setDay}
       // setDay= {day => console.log(day)}
       />)
 
