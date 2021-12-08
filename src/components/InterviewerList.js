@@ -2,7 +2,7 @@ import React from 'react';
 import InterviewerListItem from './InterviewerListItem';
 import "components/InterviewerList.scss";
 
-const InterviewerList = ({interviewers, setInterviewer, value}) => {
+const InterviewerList = ({interviewers, onChange, value}) => {
 
   console.log("interviewers--->", interviewers)
 
