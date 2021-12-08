@@ -2,7 +2,7 @@ import React from 'react';
 import InterviewerListItem from './InterviewerListItem';
 import "components/InterviewerList.scss";
 
-const InterviewerList = ({interviewers, setInterviewer, interviewer}) => {
+const InterviewerList = ({interviewers, setInterviewer, value}) => {
 
   console.log("interviewers--->", interviewers)
 
@@ -11,8 +11,8 @@ const InterviewerList = ({interviewers, setInterviewer, interviewer}) => {
       key = {interviewerObj.id}
       name = {interviewerObj.name}
       avatar= {interviewerObj.avatar}
-      selected= {interviewerObj.id === interviewer}
-      setInterviewer={() => setInterviewer(interviewerObj.id)}
+      selected= {interviewerObj.id === value}
+      setInterviewer={() => onChange(interviewerObj.id)}
     />
   )
 
