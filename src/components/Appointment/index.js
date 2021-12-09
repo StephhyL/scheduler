@@ -11,9 +11,9 @@ const Appointment = ({time, interview}) => {
   return (
     <article className="appointment">
       {time && <Header time={time}/>}
-      {interview ? <Show /> : <Empty />}
-      {/* <Empty />
-      <Show /> */}
+      {interview ? 
+        <Show student={interview.student} interviewer={interview.interviewer.name}/> :
+         <Empty />}
     </article>
   )
 }
