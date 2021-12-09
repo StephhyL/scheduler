@@ -2,9 +2,10 @@ export const getAppointmentsForDay = (state, day) => {
 
   
   const filteredState = state.days.filter(dayObj => dayObj.name === day); 
-  console.log("filtered State---->", filteredState);
+  // console.log("filtered State---->", filteredState);
 
   if (!state.days.length || !filteredState.length) {
+    // console.log("state---->", state)
     return [];
   }
 
@@ -14,6 +15,7 @@ export const getAppointmentsForDay = (state, day) => {
 
   const apptArrForDay = apptIdArrForDay.map((element) => state. appointments[element])
 
-  console.log(apptArrForDay);
+  // console.log(apptArrForDay);
+  // console.log("state---->", state)
   return apptArrForDay;
 };
