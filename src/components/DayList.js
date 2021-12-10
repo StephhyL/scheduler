@@ -13,7 +13,7 @@ const DayList = ({days, value, onChange}) => {
       // setDay= {day => console.log(day)}
       />)
 
-  console.log("parsedDays----->,", parsedDays)
+  // console.log("parsedDays----->,", parsedDays)
 
   return (
     <ul>
