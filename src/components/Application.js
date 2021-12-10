@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import DayList from "./DayList";
 import Appointment from "./Appointment";
 import axios from "axios";
+import { getAppointmentsForDay } from "helpers/selectors";
 // import "components/Appointment"
 
 import "components/Application.scss";
@@ -85,7 +86,7 @@ export default function Application(props) {
   // const [day, setDay] = useState("Monday");
   // const [days, setDays] = useState([]);
 
-  const dailyAppointments = [];
+  let dailyAppointments = [];
 
   const setDay = day => setState(prev => ({...prev, day}))
   // const setDays = days => setState(prev => ({...prev, days}))
@@ -112,10 +113,6 @@ export default function Application(props) {
   //   setDay(day)
   // }
 
-  const parsedAppointment = dailyAppointments.map(appointmentObj => {
-    return <Appointment key={appointmentObj.id} {...appointmentObj}/>
-  })
-
   useEffect(() => {
     let urlDays = `/api/days`;
     let urlAppointments = `/api/appointments`
@@ -140,6 +137,16 @@ export default function Application(props) {
     //     setDays(response.data);
     //   })
   }, [])
+
+  dailyAppointments = getAppointmentsForDay(state, state.day)
+
+  const parsedAppointment = dailyAppointments.map(appointmentObj => {
+    return <Appointment key={appointmentObj.id} {...appointmentObj}/>
+  })
+
+
+
+
 
 
 
