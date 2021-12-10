@@ -3,6 +3,7 @@ import DayList from "./DayList";
 import Appointment from "./Appointment";
 import axios from "axios";
 import { getAppointmentsForDay } from "helpers/selectors";
+import { getInterview } from "helpers/selectors";
 // import "components/Appointment"
 
 import "components/Application.scss";
@@ -47,7 +48,8 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: "",
     days: [],
-    appointments: {}
+    appointments: {},
+    interviewers: {}
   })
   // const [day, setDay] = useState("Monday");
   // const [days, setDays] = useState([]);
@@ -80,20 +82,23 @@ export default function Application(props) {
   // }
 
   useEffect(() => {
-    let urlDays = `/api/days`;
-    let urlAppointments = `/api/appointments`
+    const urlDays = `/api/days`;
+    const urlAppointments = `/api/appointments`
+    const urlInterviewers = `/api/interviewers`
 
-    let promise1 = axios.get(urlDays);
-    let promise2 = axios.get(urlAppointments);
+    const promise1 = axios.get(urlDays);
+    const promise2 = axios.get(urlAppointments);
+    const promise3 = axios.get(urlInterviewers)
 
-    let promiseArr = [promise1, promise2]
+    const promiseArr = [promise1, promise2, promise3]
 
     Promise.all(promiseArr)
       .then((all)=> {
         console.log("promise1--->", all[0].data);
         console.log("promise2--->", all[1].data);
+        console.log("promise3--->", all[2].data);
         // const [first, second] = all;
-        setState(prev => ({...prev, days: all[0].data, appointments: all[1].data}))
+        setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers:all[2].data}))
       })
 
 
@@ -107,13 +112,14 @@ export default function Application(props) {
   dailyAppointments = getAppointmentsForDay(state, state.day)
 
   const parsedAppointment = dailyAppointments.map(appointmentObj => {
-    return <Appointment key={appointmentObj.id} {...appointmentObj}/>
+    const interview = getInterview(state, appointmentObj.interview);
+
+    return (
+    <Appointment 
+      key={appointmentObj.id} 
+      {...appointmentObj} // id, time, interview
+      />)
   })
-
-
-
-
-
 
 
   return (
