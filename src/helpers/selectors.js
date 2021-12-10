@@ -12,7 +12,7 @@ export const getAppointmentsForDay = (state, day) => {
 
   // console.log("apptIdArrForDay---------->", apptIdArrForDay)
 
-  const apptArrForDay = apptIdArrForDay.map((element) => state. appointments[element])
+  const apptArrForDay = apptIdArrForDay.map((element) => state.appointments[element])
 
   // console.log(apptArrForDay);
   // console.log("state---->", state)
