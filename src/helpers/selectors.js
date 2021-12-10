@@ -1,6 +1,5 @@
 export const getAppointmentsForDay = (state, day) => {
 
-  
   const filteredState = state.days.filter(dayObj => dayObj.name === day); 
   // console.log("filtered State---->", filteredState);
 
