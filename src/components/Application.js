@@ -25,8 +25,8 @@ export default function Application(props) {
     // console.log("day---->", day)
     // console.log("state before set---->", state);
     setState({...state, day})
-    console.log("day in setDay----->", day);
-    console.log("state after---->", state.day);
+    // console.log("day in setDay----->", day);
+    // console.log("state after---->", state.day);
   }
 
   // const setDays = days => setState(prev => ({...prev, days}))
