@@ -4,6 +4,7 @@ import "components/DayListItem.scss"
 
 const DayListItem = ({name, spots, setDay, selected}) => {
 
+
   let dayClass = className(
     "day-list__item", {
     "day-list__item--selected": selected,

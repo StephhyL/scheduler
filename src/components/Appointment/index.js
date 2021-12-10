@@ -5,7 +5,7 @@ import Empty from './Empty'
 import Show from './Show'
 
 const Appointment = ({time, interview}) => {
-  // console.log("interview-in index--->", interview)
+  console.log("interview-in index--->", interview)
   return (
     <article className="appointment">
       {time && <Header time={time}/>}

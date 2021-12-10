@@ -4,14 +4,20 @@ import DayListItem from "./DayListItem";
 
 const DayList = ({days, value, onChange}) => {
 
-  const parsedDays = days.map((dayObj) => <DayListItem 
+
+
+  const parsedDays = days.map((dayObj) => 
+  {
+    // console.log("dayObj---->", dayObj)
+    // console.log("onChange--->", onChange)
+    return <DayListItem 
       key={dayObj.id}
       name={dayObj.name}
       spots={dayObj.spots}
       selected={dayObj.name === value}
       setDay={onChange}
       // setDay= {day => console.log(day)}
-      />)
+      /> })
 
   // console.log("parsedDays----->,", parsedDays)
 
