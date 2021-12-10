@@ -6,11 +6,16 @@ const useVisualMode = (initalMode) => {
 
   console.log("HISTORY OUTSIDE---->", history)
 
-  const transition = (newMode) => {
+  const transition = (newMode, replace) => {
     // history.push(newMode);
     // console.log("history inside transition-->", history)
-    setHistory([...history, newMode]);
-    setMode(newMode);
+    if(replace) {
+      history[history.length - 1] = newMode;
+      setMode(newMode); 
+    } else {
+      setHistory([...history, newMode]);
+      setMode(newMode);
+    }
   }
 
   const back = () => {
