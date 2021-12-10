@@ -6,7 +6,7 @@ const useVisualMode = (initalMode) => {
 
   console.log("HISTORY OUTSIDE---->", history)
 
-  const transition = (newMode, replace) => {
+  const transition = (newMode, replace = false) => {
     // history.push(newMode);
     // console.log("history inside transition-->", history)
     if(replace) {
