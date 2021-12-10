@@ -18,3 +18,16 @@ export const getAppointmentsForDay = (state, day) => {
   // console.log("state---->", state)
   return apptArrForDay;
 };
+
+export const getInterview = (state, interview) => {
+  
+  if (!interview) {
+    return null;
+  }
+
+  const interviewerId = interview.interviewer;
+
+  interview.interviewer = state.interviewers[interviewerId];
+
+  return interview;
+};
