@@ -29,30 +29,6 @@ export default function Application(props) {
     // console.log("state after---->", state.day);
   }
 
-  // const setDays = days => setState(prev => ({...prev, days}))
-
-  // const days = [
-  //   {
-  //     id:1, 
-  //     name: "Monday",
-  //     spots:2
-  //   },
-  //   {
-  //     id:2, 
-  //     name: "Tuesday",
-  //     spots:5
-  //   },
-  //   {
-  //     id:3, 
-  //     name: "Wednesday",
-  //     spots:0
-  //   }
-  // ];
-
-  // const updateDate = (day) => {
-  //   setDay(day)
-  // }
-
   useEffect(() => {
     const urlDays = `/api/days`;
     const urlAppointments = `/api/appointments`
