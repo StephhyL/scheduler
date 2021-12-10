@@ -4,7 +4,7 @@ const useVisualMode = (initalMode) => {
   const [mode, setMode] = useState(initalMode);
   const [history, setHistory] = useState([initalMode]);
 
-  console.log("HISTORY OUTSIDE---->", history)
+  // console.log("HISTORY OUTSIDE---->", history)
 
   const transition = (newMode, replace = false) => {
     // history.push(newMode);
