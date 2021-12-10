@@ -56,7 +56,15 @@ export default function Application(props) {
 
   let dailyAppointments = [];
 
-  const setDay = day => setState(prev => ({...prev, day}))
+
+  const setDay = (day) => {
+    // console.log("day---->", day)
+    // console.log("state before set---->", state);
+    setState({...state, day})
+    console.log("day in setDay----->", day);
+    console.log("state after---->", state.day);
+  }
+
   // const setDays = days => setState(prev => ({...prev, days}))
 
   // const days = [
@@ -94,9 +102,9 @@ export default function Application(props) {
 
     Promise.all(promiseArr)
       .then((all)=> {
-        console.log("promise1--->", all[0].data);
-        console.log("promise2--->", all[1].data);
-        console.log("promise3--->", all[2].data);
+        // console.log("promise1--->", all[0].data);
+        // console.log("promise2--->", all[1].data);
+        // console.log("promise3--->", all[2].data);
         // const [first, second] = all;
         setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers:all[2].data}))
       })
@@ -113,11 +121,17 @@ export default function Application(props) {
 
   const parsedAppointment = dailyAppointments.map(appointmentObj => {
     const interview = getInterview(state, appointmentObj.interview);
+    // console.log("state", state)
+    // console.log("interview---> ", interview);
+    // console.log("appointmentObj.interview", appointmentObj.interview)
 
     return (
     <Appointment 
       key={appointmentObj.id} 
-      {...appointmentObj} // id, time, interview
+      id={appointmentObj.id}
+      time={appointmentObj.time}
+      interview={interview}
+      // {...appointmentObj} 
       />)
   })
 
