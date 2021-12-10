@@ -14,10 +14,12 @@ const useVisualMode = (initalMode) => {
   }
 
   const back = () => {
-    history.pop();
-    // console.log("history--->", history)
-    let prevMode = history[history.length - 1];
-    setMode(prevMode);
+    if (history.length > 1) {
+      history.pop();
+      // console.log("history--->", history)
+      let prevMode = history[history.length - 1];
+      setMode(prevMode);
+    }
   };
   
   return {mode, transition, back};
