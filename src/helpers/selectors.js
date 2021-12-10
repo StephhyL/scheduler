@@ -25,9 +25,21 @@ export const getInterview = (state, interview) => {
     return null;
   }
 
-  const interviewerId = interview.interviewer;
+  const interviewerId = interview.interviewer; // 2
 
-  interview.interviewer = state.interviewers[interviewerId];
+  // interview.interviewer = state.interviewers[interviewerId];
+  // ***WRONG
 
-  return interview;
+  let newInterview = {...interview, interviewer: state.interviewers[interviewerId]}
+
+  return newInterview;
+
+  // console.log("state--->", state);
+  // console.log("interviewerId--->", interviewerId);
+  // console.log("interview.interviewer--->", interview.interviewer);
+
+  // let newInterview = {...interview, interviewer: interview.interviewer}
+  // console.log("newInterview...", newInterview)
+
+  // return newInterview;
 };
