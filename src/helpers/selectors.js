@@ -38,7 +38,7 @@ export const getInterviewersForDay = (state, day) => {
 
   // console.log(apptArrForDay);
   // console.log("state---->", state)
-  console.log("interviewersArrForDay---->", interviewersArrForDay)
+  // console.log("interviewersArrForDay---->", interviewersArrForDay)
   return interviewersArrForDay;
 };
 
