@@ -11,16 +11,20 @@ import "components/Application.scss";
 
 export default function Application() {
 
-  const bookInterview = (id, interview) => {
-    console.log(id, interview)
-  }
-
+  
   const [state, setState] = useState({
     day: "",
     days: [],
     appointments: {},
     interviewers: {}
   })
+
+  const bookInterview = (id, interview) => {
+    const appointment = {
+      ...state.appointments[id],
+      interview: {...interview}
+    }
+  }
 
   let dailyAppointments = [];
 
@@ -63,7 +67,7 @@ export default function Application() {
   const parsedAppointment = dailyAppointments.map(appointmentObj => {
     const interview = getInterview(state, appointmentObj.interview);
     // console.log("state", state)
-    // console.log("interview---> ", interview);
+    console.log("interview---> ", interview);
     // console.log("appointmentObj.interview", appointmentObj.interview)
 
     return (
