@@ -31,23 +31,14 @@ export default function Application() {
       ...state.appointments,
       [id]: appointment
     }
-    // OMG IS IT SUPPOSED TO CHANGE THE SPOTS LEFT
-    console.log("state---->", state)
-
-    //Do I only include the part that I am changing... i.e. just ...state, appointments:{...state.appointments} or need I copy everything
-    // const copyOfState = {
-    //   ...state, 
-    //   appointments: {...state.appointments}}
-
-    // console.log("copyOfState---->", copyOfState)
-    setState({...state, appointments})
-
+    
     const urlAppt = `api/appointments/${id}`
-    axios.put(urlAppt, {interview})
-    .then((res)=> {
-      console.log(res);
+
+    return axios.put(urlAppt, {interview: interview})
+    .then(()=> {
       setState({...state, appointments})
       })
+    
   }
 
   const cancelInterview = (id) => {
@@ -64,11 +55,14 @@ export default function Application() {
     }
     console.log("appointments---->", appointments)
 
-    setState({...state, appointments})
+
 
     const urlDeleteAppt = `api/appointments/${id}`
     // how come this deletes the data from just interview AND NOT id, time, interview???
-    axios.delete(urlDeleteAppt)
+    return axios.delete(urlDeleteAppt)
+      .then(()=>{
+         setState({...state, appointments})})
+
     // axios.put(urlDeleteAppt, {interview: null})
     // .then((res)=> {
     //   console.log("res in delete", res);
@@ -104,7 +98,7 @@ export default function Application() {
         setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers:all[2].data}))
       })
 
-
+      console.log("in use effect!")
     // axios.get(urlDays)
     //   .then((response) => {
     //     console.log("response.data----->", response.data);
