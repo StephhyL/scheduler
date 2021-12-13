@@ -12,19 +12,17 @@ const CREATE = "CREATE";
 
 const Appointment = ({id, time, interview, interviewers, bookInterview}) => {
 
+  const {mode, transition, back} = useVisualMode(interview? SHOW : EMPTY)
+
   const save = (name, interviewer) => {
     const interview = {
       student: name,
       interviewer
     };
-    console.log("id--->", id)
     bookInterview(id, interview);
+    transition(SHOW)
   };
-
-
-
-  const {mode, transition, back} = useVisualMode(interview? SHOW : EMPTY)
-
+  
   return (
     <article className="appointment">
       {time && <Header time={time}/>}
