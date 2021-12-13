@@ -13,7 +13,7 @@ const Form = (props) => {
 
   const cancel = () => {
     reset();
-    {props.onCancel()};
+    props.onCancel();
   }
 
   return (
