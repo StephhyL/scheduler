@@ -11,7 +11,7 @@ const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVE = "SAVE";
-// const DELETE = "DELETE";
+const DELETE = "DELETE";
 
 const Appointment = ({id, time, interview, interviewers, bookInterview, cancelInterview}) => {
 
@@ -32,7 +32,7 @@ const Appointment = ({id, time, interview, interviewers, bookInterview, cancelIn
   };
   
   const remove = () => {
-    transition(SAVE);
+    transition(DELETE); // replace with delete later
     console.log("id coming into remove function ---->", id)
     cancelInterview(id);
     transition(EMPTY);
@@ -60,6 +60,10 @@ const Appointment = ({id, time, interview, interviewers, bookInterview, cancelIn
       )}
       {mode === SAVE && (
         <Status message="Saving!!!"/>
+      )
+      }
+      {mode === DELETE && (
+        <Status message="Deleting"/>
       )
       }
     </article>
