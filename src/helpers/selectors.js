@@ -44,9 +44,6 @@ export const getInterviewersForDay = (state, day) => {
 
 
 
-
-
-
 //***** getInterview */
 export const getInterview = (state, interview) => {
   
@@ -54,21 +51,9 @@ export const getInterview = (state, interview) => {
     return null;
   }
 
-  const interviewerId = interview.interviewer; // 2
-
-  // interview.interviewer = state.interviewers[interviewerId];
-  // ***WRONG
-
+  const interviewerId = interview.interviewer;
+  
   let newInterview = {...interview, interviewer: state.interviewers[interviewerId]}
 
   return newInterview;
-
-  // console.log("state--->", state);
-  // console.log("interviewerId--->", interviewerId);
-  // console.log("interview.interviewer--->", interview.interviewer);
-
-  // let newInterview = {...interview, interviewer: interview.interviewer}
-  // console.log("newInterview...", newInterview)
-
-  // return newInterview;
 };
