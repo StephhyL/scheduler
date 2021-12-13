@@ -31,12 +31,41 @@ export default function Application() {
       ...state.appointments,
       [id]: appointment
     }
-    
+    // OMG IS IT SUPPOSED TO CHANGE THE SPOTS LEFT
+    setState({...state, appointments})
+
     const urlAppt = `api/appointments/${id}`
     axios.put(urlAppt, {interview})
-    
-    setState({...state, appointments})
+    .then((res)=> {
+      console.log(res);
+      setState({...state, appointments})
+      })
   }
+
+  const cancelInterview = (id) => {
+    console.log("appointment before change --->", state.appointments)
+    console.log("id---->", id)
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    }
+    console.log("appointment---->", appointment)
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    }
+    console.log("appointments---->", appointments)
+
+    setState({...state, appointments})
+
+    const urlDeleteAppt = `api/appointments/${id}`
+    axios.put(urlDeleteAppt, {interview: null})
+    .then((res)=> {
+      console.log(res);
+      setState({...state, appointments})
+    })
+  }
+
 
   let dailyAppointments = [];
 
@@ -90,6 +119,7 @@ export default function Application() {
       interview={interview}
       interviewers={interviewers}
       bookInterview={bookInterview}
+      cancelInterview={cancelInterview}
       // {...appointmentObj} 
       />)
   })
