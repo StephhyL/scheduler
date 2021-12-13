@@ -10,20 +10,53 @@ const useVisualMode = (initalMode) => {
     // history.push(newMode);
     // console.log("history inside transition-->", history)
     if(replace) {
-      history[history.length - 1] = newMode;
-      setMode(newMode); 
+      setHistory((prevHistory)=> {
+        const copyOfHistory = [...prevHistory];
+        copyOfHistory.pop();
+        copyOfHistory.push(newMode);
+        setMode(newMode);
+        return copyOfHistory;
+      })
+      // history[history.length - 1] = newMode;
+      // setMode(newMode); 
     } else {
-      setHistory([...history, newMode]);
-      setMode(newMode);
+      setHistory(()=> {
+        setMode(newMode);
+        return [...history, newMode];
+      })
+      // setHistory([...history, newMode]);
+      // setMode(newMode);
     }
   }
 
   const back = () => {
     if (history.length > 1) {
-      history.pop();
-      // console.log("history--->", history)
-      let prevMode = history[history.length - 1];
-      setMode(prevMode);
+
+      setHistory((prevHistory) => {
+        // console.log("prevHistory--->", prevHistory)
+        const copyOfHistory = [...prevHistory];
+        copyOfHistory.pop();
+        // console.log("copyOfHistory--->", copyOfHistory)
+
+        const prevMode = copyOfHistory[copyOfHistory.length - 1];
+        // console.log("prevMode--->", prevMode)
+        setMode(prevMode);
+        return copyOfHistory;
+      })
+      // console.log("prevHistory---->", prevHistory)
+      // const copyOfHistory = [prevHistory];
+      // console.log("copyOfHistory", copyOfHistory)
+      // copyOfHistory.pop();
+      // // console.log("history--->", history)
+      // let prevMode = copyOfHistory[history.length - 1];
+      // setMode(prevMode);
+      // return copyOfHistory;
+
+      //history.pop();
+      // let prevMode = history[history.length - 1];
+      // setMode(prevMode)
+
+
     }
   };
   
