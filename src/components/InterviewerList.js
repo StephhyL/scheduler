@@ -4,7 +4,7 @@ import "components/InterviewerList.scss";
 
 const InterviewerList = ({interviewers, onChange, value}) => {
 
-  console.log("interviewers--->", interviewers)
+  // console.log("interviewers--->", interviewers)
 
   const parsedInterviewer = interviewers.map((interviewerObj) =>
     <InterviewerListItem 
