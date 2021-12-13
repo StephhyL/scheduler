@@ -14,6 +14,7 @@ const CREATE = "CREATE";
 const SAVE = "SAVE";
 const DELETE = "DELETE";
 const CONFIRM = "CONFIRM";
+const EDIT = "EDIT";
 
 const Appointment = ({id, time, interview, interviewers, bookInterview, cancelInterview}) => {
 
@@ -51,6 +52,7 @@ const Appointment = ({id, time, interview, interviewers, bookInterview, cancelIn
         <Show 
           student={interview.student} 
           interviewer={interview.interviewer.name}
+          onEdit = {()=>transition(EDIT)}
           onDelete={()=> {transition(CONFIRM)}}
           />) }
       {mode === CREATE && (
@@ -76,6 +78,16 @@ const Appointment = ({id, time, interview, interviewers, bookInterview, cancelIn
         />
       )
       }
+      {mode === EDIT && (
+        <Form 
+          student = {interview.student}
+          interviewer = {interview.interviewer.id}
+          interviewers={interviewers}
+          // onCancel = {()=> transition(SHOW)}
+          onCancel = {()=>{back()}}
+          onSave = {save}
+        />
+      )}
     </article>
   )
 }
