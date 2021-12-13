@@ -32,6 +32,9 @@ export default function Application() {
       [id]: appointment
     }
     setState({...state, appointments})
+
+    const urlAppt = `api/appointments/${id}`
+    axios.put(urlAppt, {interview})
   }
 
   let dailyAppointments = [];
@@ -75,7 +78,7 @@ export default function Application() {
   const parsedAppointment = dailyAppointments.map(appointmentObj => {
     const interview = getInterview(state, appointmentObj.interview);
     // console.log("state", state)
-    console.log("interview---> ", interview);
+    // console.log("interview---> ", interview);
     // console.log("appointmentObj.interview", appointmentObj.interview)
 
     return (
