@@ -32,13 +32,21 @@ export default function Application() {
       [id]: appointment
     }
     // OMG IS IT SUPPOSED TO CHANGE THE SPOTS LEFT
-    setState({...state, appointments})
+    console.log("state---->", state)
+
+    //Do I only include the part that I am changing... i.e. just ...state, appointments:{...state.appointments} or need I copy everything
+    const copyOfState = {
+      ...state, 
+      appointments: {...state.appointments}}
+
+    console.log("copyOfState---->", copyOfState)
+    setState({...copyOfState, appointments})
 
     const urlAppt = `api/appointments/${id}`
     axios.put(urlAppt, {interview})
     .then((res)=> {
       console.log(res);
-      setState({...state, appointments})
+      setState({...copyOfState, appointments})
       })
   }
 
