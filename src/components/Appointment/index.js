@@ -11,10 +11,14 @@ const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVE = "SAVE";
+// const DELETE = "DELETE";
 
-const Appointment = ({id, time, interview, interviewers, bookInterview}) => {
+const Appointment = ({id, time, interview, interviewers, bookInterview, cancelInterview}) => {
 
   const {mode, transition, back} = useVisualMode(interview? SHOW : EMPTY)
+
+  console.log('mode--->', mode)
+  console.log('interview--->', interview)
 
   const save = (name, interviewer) => {
     const interview = {
@@ -22,10 +26,18 @@ const Appointment = ({id, time, interview, interviewers, bookInterview}) => {
       interviewer
     };
     transition(SAVE);
+    console.log("interview---->", interview)
     bookInterview(id, interview);
     transition(SHOW);
   };
   
+  const remove = () => {
+    transition(SAVE);
+    console.log("id coming into remove function ---->", id)
+    cancelInterview(id);
+    transition(EMPTY);
+  }
+
   return (
     <article className="appointment">
       {time && <Header time={time}/>}
@@ -37,6 +49,7 @@ const Appointment = ({id, time, interview, interviewers, bookInterview}) => {
         <Show 
           student={interview.student} 
           interviewer={interview.interviewer.name}
+          onDelete={remove}
           />) }
       {mode === CREATE && (
         <Form 
