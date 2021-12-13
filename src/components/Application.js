@@ -19,11 +19,19 @@ export default function Application() {
     interviewers: {}
   })
 
+  /**
+   * replaces the interview content at a specific appointment (id) and then updates the appointment list with the updated appointment created (sets new state)
+   */
   const bookInterview = (id, interview) => {
     const appointment = {
       ...state.appointments[id],
       interview: {...interview}
     }
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    }
+    setState({...state, appointments})
   }
 
   let dailyAppointments = [];
