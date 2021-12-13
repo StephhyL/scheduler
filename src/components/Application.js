@@ -10,6 +10,11 @@ import "components/Application.scss";
 
 
 export default function Application() {
+
+  const bookInterview = (id, interview) => {
+    console.log(id, interview)
+  }
+
   const [state, setState] = useState({
     day: "",
     days: [],
@@ -68,6 +73,7 @@ export default function Application() {
       time={appointmentObj.time}
       interview={interview}
       interviewers={interviewers}
+      bookInterview={bookInterview}
       // {...appointmentObj} 
       />)
   })
