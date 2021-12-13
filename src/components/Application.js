@@ -3,30 +3,24 @@ import DayList from "./DayList";
 import Appointment from "./Appointment";
 import axios from "axios";
 import { getAppointmentsForDay } from "helpers/selectors";
+import { getInterviewersForDay } from "helpers/selectors";
 import { getInterview } from "helpers/selectors";
 
 import "components/Application.scss";
 
 
-export default function Application(props) {
+export default function Application() {
   const [state, setState] = useState({
     day: "",
     days: [],
     appointments: {},
     interviewers: {}
   })
-  // const [day, setDay] = useState("Monday");
-  // const [days, setDays] = useState([]);
 
   let dailyAppointments = [];
 
-
   const setDay = (day) => {
-    // console.log("day---->", day)
-    // console.log("state before set---->", state);
     setState({...state, day})
-    // console.log("day in setDay----->", day);
-    // console.log("state after---->", state.day);
   }
 
   useEffect(() => {
@@ -59,6 +53,8 @@ export default function Application(props) {
 
   dailyAppointments = getAppointmentsForDay(state, state.day)
 
+  const interviewers = getInterviewersForDay(state, state.day)
+
   const parsedAppointment = dailyAppointments.map(appointmentObj => {
     const interview = getInterview(state, appointmentObj.interview);
     // console.log("state", state)
@@ -71,6 +67,7 @@ export default function Application(props) {
       id={appointmentObj.id}
       time={appointmentObj.time}
       interview={interview}
+      interviewers={interviewers}
       // {...appointmentObj} 
       />)
   })
@@ -89,7 +86,7 @@ export default function Application(props) {
           <DayList 
             days={state.days}
             value={state.day}
-            onChange={setDay} //********* */
+            onChange={setDay}
           />
         </nav>
         <img
