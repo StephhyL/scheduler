@@ -35,18 +35,18 @@ export default function Application() {
     console.log("state---->", state)
 
     //Do I only include the part that I am changing... i.e. just ...state, appointments:{...state.appointments} or need I copy everything
-    const copyOfState = {
-      ...state, 
-      appointments: {...state.appointments}}
+    // const copyOfState = {
+    //   ...state, 
+    //   appointments: {...state.appointments}}
 
-    console.log("copyOfState---->", copyOfState)
-    setState({...copyOfState, appointments})
+    // console.log("copyOfState---->", copyOfState)
+    setState({...state, appointments})
 
     const urlAppt = `api/appointments/${id}`
     axios.put(urlAppt, {interview})
     .then((res)=> {
       console.log(res);
-      setState({...copyOfState, appointments})
+      setState({...state, appointments})
       })
   }
 
@@ -67,11 +67,14 @@ export default function Application() {
     setState({...state, appointments})
 
     const urlDeleteAppt = `api/appointments/${id}`
-    axios.put(urlDeleteAppt, {interview: null})
-    .then((res)=> {
-      console.log(res);
-      setState({...state, appointments})
-    })
+    // how come this deletes the data from just interview AND NOT id, time, interview???
+    axios.delete(urlDeleteAppt)
+    // axios.put(urlDeleteAppt, {interview: null})
+    // .then((res)=> {
+    //   console.log("res in delete", res);
+    //   setState({...state, appointments})
+    // })
+    // .catch((err) => console.log(err.message))
   }
 
 
