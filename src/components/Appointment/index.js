@@ -11,7 +11,7 @@ import Confirm from './Confirm'
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
-const SAVE = "SAVE";
+const SAVING = "SAVING";
 const DELETE = "DELETE";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
@@ -20,25 +20,29 @@ const Appointment = ({id, time, interview, interviewers, bookInterview, cancelIn
 
   const {mode, transition, back} = useVisualMode(interview? SHOW : EMPTY)
 
-  console.log('mode--->', mode)
-  console.log('interview--->', interview)
+  // console.log('mode--->', mode)
+  // console.log('interview--->', interview)
 
   const save = (name, interviewer) => {
     const interview = {
       student: name,
       interviewer
     };
-    transition(SAVE);
-    console.log("interview---->", interview)
-    bookInterview(id, interview);
-    transition(SHOW);
+    transition(SAVING);
+    bookInterview(id, interview)
+      .then(()=>{
+        transition(SHOW);
+      })
   };
+  console.log("mode2--->", mode)
   
   const remove = () => {
     transition(DELETE); // replace with delete later
     console.log("id coming into remove function ---->", id)
-    cancelInterview(id);
-    transition(EMPTY);
+    cancelInterview(id)
+      .then(()=>{
+        transition(EMPTY);
+      });
   }
 
   return (
@@ -62,7 +66,7 @@ const Appointment = ({id, time, interview, interviewers, bookInterview, cancelIn
           onSave = {save}
         />
       )}
-      {mode === SAVE && (
+      {mode === SAVING && (
         <Status message="Saving!!!"/>
       )
       }
@@ -86,6 +90,7 @@ const Appointment = ({id, time, interview, interviewers, bookInterview, cancelIn
           // onCancel = {()=> transition(SHOW)}
           onCancel = {()=>{back()}}
           onSave = {save}
+          // transition = {transition}
         />
       )}
     </article>
