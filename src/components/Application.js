@@ -31,10 +31,11 @@ export default function Application() {
       ...state.appointments,
       [id]: appointment
     }
-    setState({...state, appointments})
-
+    
     const urlAppt = `api/appointments/${id}`
     axios.put(urlAppt, {interview})
+    
+    setState({...state, appointments})
   }
 
   let dailyAppointments = [];

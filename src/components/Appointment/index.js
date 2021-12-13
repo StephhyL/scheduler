@@ -5,10 +5,12 @@ import Empty from './Empty'
 import Show from './Show'
 import useVisualMode from 'hooks/useVisualMode'
 import Form from './Form'
+import Status from './Status'
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
+const SAVE = "SAVE";
 
 const Appointment = ({id, time, interview, interviewers, bookInterview}) => {
 
@@ -19,8 +21,9 @@ const Appointment = ({id, time, interview, interviewers, bookInterview}) => {
       student: name,
       interviewer
     };
+    transition(SAVE);
     bookInterview(id, interview);
-    transition(SHOW)
+    transition(SHOW);
   };
   
   return (
@@ -42,6 +45,10 @@ const Appointment = ({id, time, interview, interviewers, bookInterview}) => {
           onSave = {save}
         />
       )}
+      {mode === SAVE && (
+        <Status message="Saving!!!"/>
+      )
+      }
     </article>
   )
 }
