@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+/**Hook responsible for inital render of page and subsequent renderings. Responsible for passing data to other components*/
 export const useApplicationData = () => {
   const [state, setState] = useState({
     day: "",
