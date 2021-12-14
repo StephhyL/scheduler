@@ -121,7 +121,7 @@ export const useApplicationData = () => {
       }));
     });
 
-    console.log("in use effect!");
+    // console.log("in use effect!");
     // axios.get(urlDays)
     //   .then((response) => {
     //     console.log("response.data----->", response.data);
