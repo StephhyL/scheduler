@@ -8,9 +8,7 @@ import { getInterview } from "helpers/selectors";
 
 import "components/Application.scss";
 
-
 export default function Application() {
-
   
   const [state, setState] = useState({
     day: "",
@@ -31,7 +29,7 @@ export default function Application() {
       ...state.appointments,
       [id]: appointment
     }
-    
+
     const urlAppt = `api/appointments/${id}`
 
     return axios.put(urlAppt, {interview: interview})
@@ -42,33 +40,21 @@ export default function Application() {
   }
 
   const cancelInterview = (id) => {
-    console.log("appointment before change --->", state.appointments)
-    console.log("id---->", id)
+ 
     const appointment = {
       ...state.appointments[id],
       interview: null
     }
-    console.log("appointment---->", appointment)
+   
     const appointments = {
       ...state.appointments,
       [id]: appointment
     }
-    console.log("appointments---->", appointments)
-
-
 
     const urlDeleteAppt = `api/appointments/${id}`
-    // how come this deletes the data from just interview AND NOT id, time, interview???
     return axios.delete(urlDeleteAppt)
       .then(()=>{
          setState({...state, appointments})})
-
-    // axios.put(urlDeleteAppt, {interview: null})
-    // .then((res)=> {
-    //   console.log("res in delete", res);
-    //   setState({...state, appointments})
-    // })
-    // .catch((err) => console.log(err.message))
   }
 
 
