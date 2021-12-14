@@ -10,6 +10,16 @@ export const useApplicationData = () => {
     interviewers: {},
   });
 
+  const getFreeSpots = (dayObj, appointments) => {
+    let apptIdArr = dayObj.appointments; // not the parameter
+    const emptyArr = apptIdArr.filter((apptId) => {
+      return !appointments[apptId].interview;
+    });
+    console.log("emptyArr--->", emptyArr);
+    const spots = emptyArr.length;
+    return spots;
+  };
+
   /**
    * replaces the interview content at a specific appointment (id) and then updates the appointment list with the updated appointment created (sets new state)
    */
@@ -23,10 +33,27 @@ export const useApplicationData = () => {
       [id]: appointment,
     };
 
+    // taking a copy of the state.days
+    const days = [...state.days];
+
+    // finds the target day obj in the array of days
+    let targetDayObj = {};
+    for (const dayObj of days) {
+      if (dayObj.name === state.day) {
+        targetDayObj = dayObj;
+      }
+    }
+    const spots = getFreeSpots(targetDayObj, appointments);
+    const targetId = targetDayObj.id;
+    const indexTargetDayObj = days.findIndex(
+      (element) => element.id === targetId
+    );
+    days[indexTargetDayObj].spots = spots;
+
     const urlAppt = `api/appointments/${id}`;
 
     return axios.put(urlAppt, { interview: interview }).then(() => {
-      setState({ ...state, appointments });
+      setState({ ...state, appointments, days });
     });
   };
 
@@ -41,9 +68,28 @@ export const useApplicationData = () => {
       [id]: appointment,
     };
 
+    // taking a copy of the state.days
+    const days = [...state.days];
+
+    // finds the target day obj in the array of days
+    let targetDayObj = {};
+    for (const dayObj of days) {
+      if (dayObj.name === state.day) {
+        targetDayObj = dayObj;
+      }
+    }
+    // gets the number of spots given the targetDayObj and the "updated appointments object"
+    const spots = getFreeSpots(targetDayObj, appointments);
+    const targetId = targetDayObj.id;
+    const indexTargetDayObj = days.findIndex(
+      (element) => element.id === targetId
+    );
+    //updating the specific day object's spots
+    days[indexTargetDayObj].spots = spots;
+
     const urlDeleteAppt = `api/appointments/${id}`;
     return axios.delete(urlDeleteAppt).then(() => {
-      setState({ ...state, appointments });
+      setState({ ...state, appointments, days });
     });
   };
 
