@@ -7,6 +7,7 @@ import useVisualMode from 'hooks/useVisualMode'
 import Form from './Form'
 import Status from './Status'
 import Confirm from './Confirm'
+import Error from './Error'
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
@@ -15,6 +16,8 @@ const SAVING = "SAVING";
 const DELETE = "DELETE";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE"
 
 const Appointment = ({id, time, interview, interviewers, bookInterview, cancelInterview}) => {
 
@@ -31,10 +34,13 @@ const Appointment = ({id, time, interview, interviewers, bookInterview, cancelIn
     transition(SAVING);
     bookInterview(id, interview)
       .then(()=>{
-        transition(SHOW);
+        transition(SHOW)
+      })
+      .catch((error)=> {
+        transition(ERROR_SAVE, true)
       })
   };
-  console.log("mode2--->", mode)
+  
   
   const remove = () => {
     transition(DELETE); // replace with delete later
@@ -42,7 +48,10 @@ const Appointment = ({id, time, interview, interviewers, bookInterview, cancelIn
     cancelInterview(id)
       .then(()=>{
         transition(EMPTY);
-      });
+      })
+      .catch((error)=>{
+        transition(ERROR_DELETE, true)
+      })
   }
 
   return (
@@ -91,6 +100,12 @@ const Appointment = ({id, time, interview, interviewers, bookInterview, cancelIn
           onCancel = {()=>{back()}}
           onSave = {save}
           // transition = {transition}
+        />
+      )}
+      {mode === ERROR_SAVE && (
+        <Error
+          message="Could not save appointment"
+          onClose={()=>{back()}}
         />
       )}
     </article>
