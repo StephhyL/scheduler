@@ -43,8 +43,7 @@ const Appointment = ({id, time, interview, interviewers, bookInterview, cancelIn
   
   
   const remove = () => {
-    transition(DELETE); // replace with delete later
-    console.log("id coming into remove function ---->", id)
+    transition(DELETE, true); // replace with delete later
     cancelInterview(id)
       .then(()=>{
         transition(EMPTY);
@@ -105,6 +104,12 @@ const Appointment = ({id, time, interview, interviewers, bookInterview, cancelIn
       {mode === ERROR_SAVE && (
         <Error
           message="Could not save appointment"
+          onClose={()=>{back()}}
+        />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error
+          message="Could not cancel appointment"
           onClose={()=>{back()}}
         />
       )}
