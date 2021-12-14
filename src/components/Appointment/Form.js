@@ -28,6 +28,7 @@ const Form = (props) => {
           <input
             className="appointment__create-input text--semi-bold"
             name="name"
+            data-testid="student-name-input"
             type="text"
             placeholder="Enter Student Name"
             value={student}
