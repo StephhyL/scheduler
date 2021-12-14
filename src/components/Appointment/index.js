@@ -29,23 +29,20 @@ const Appointment = ({
 }) => {
   const { mode, transition, back } = useVisualMode(interview ? SHOW : EMPTY);
 
-  // console.log('mode--->', mode)
-  // console.log('interview--->', interview)
-
   const save = (name, interviewer) => {
     const interview = {
       student: name,
       interviewer,
     };
     transition(SAVING);
-    bookInterview(id, interview).then(() => {
-      console.log("THEN");
-      transition(SHOW);
-    });
-    // .catch((error) => {
-    //   console.log("hitting this error");
-    //   transition(ERROR_SAVE, true);
-    // });
+    bookInterview(id, interview)
+      .then(() => {
+        console.log("THEN");
+        transition(SHOW);
+      })
+      .catch((error) => {
+        transition(ERROR_SAVE, true);
+      });
   };
 
   const remove = () => {
@@ -104,12 +101,10 @@ const Appointment = ({
           student={interview.student}
           interviewer={interview.interviewer.id}
           interviewers={interviewers}
-          // onCancel = {()=> transition(SHOW)}
           onCancel={() => {
             back();
           }}
           onSave={save}
-          // transition = {transition}
         />
       )}
       {mode === ERROR_SAVE && (
@@ -122,7 +117,7 @@ const Appointment = ({
       )}
       {mode === ERROR_DELETE && (
         <Error
-          message="Could not cancel appointment"
+          message="Could not cancel appointment."
           onClose={() => {
             back();
           }}
