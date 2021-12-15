@@ -18,9 +18,6 @@ export default function Application() {
 
   const parsedAppointment = dailyAppointments.map((appointmentObj) => {
     const interview = getInterview(state, appointmentObj.interview);
-    // console.log("state", state)
-    // console.log("interview---> ", interview);
-    // console.log("appointmentObj.interview", appointmentObj.interview)
 
     return (
       <Appointment
@@ -56,7 +53,11 @@ export default function Application() {
       </section>
       <section className="schedule">
         {parsedAppointment}
-        <Appointment key="last" time="5pm" />
+        {state.day ? (
+          <Appointment key="last" time="5pm" />
+        ) : (
+          "Please start by selecting a day to book an appointment!"
+        )}
       </section>
     </main>
   );
