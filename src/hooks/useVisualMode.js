@@ -9,29 +9,28 @@ const useVisualMode = (initalMode) => {
   const transition = (newMode, replace = false) => {
     // history.push(newMode);
     // console.log("history inside transition-->", history)
-    if(replace) {
-      setHistory((prevHistory)=> {
+    if (replace) {
+      setHistory((prevHistory) => {
         const copyOfHistory = [...prevHistory];
         copyOfHistory.pop();
         copyOfHistory.push(newMode);
         setMode(newMode);
         return copyOfHistory;
-      })
+      });
       // history[history.length - 1] = newMode;
-      // setMode(newMode); 
+      // setMode(newMode);
     } else {
-      setHistory(()=> {
+      setHistory(() => {
         setMode(newMode);
         return [...history, newMode];
-      })
+      });
       // setHistory([...history, newMode]);
       // setMode(newMode);
     }
-  }
+  };
 
   const back = () => {
     if (history.length > 1) {
-
       setHistory((prevHistory) => {
         // console.log("prevHistory--->", prevHistory)
         const copyOfHistory = [...prevHistory];
@@ -42,7 +41,7 @@ const useVisualMode = (initalMode) => {
         // console.log("prevMode--->", prevMode)
         setMode(prevMode);
         return copyOfHistory;
-      })
+      });
       // console.log("prevHistory---->", prevHistory)
       // const copyOfHistory = [prevHistory];
       // console.log("copyOfHistory", copyOfHistory)
@@ -55,14 +54,10 @@ const useVisualMode = (initalMode) => {
       //history.pop();
       // let prevMode = history[history.length - 1];
       // setMode(prevMode)
-
-
     }
   };
-  
-  return {mode, transition, back};
+
+  return { mode, transition, back };
 };
-
-
 
 export default useVisualMode;
