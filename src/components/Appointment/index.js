@@ -19,14 +19,9 @@ const EDIT = "EDIT";
 const ERROR_SAVE = "ERROR_SAVE";
 const ERROR_DELETE = "ERROR_DELETE";
 
-const Appointment = ({
-  id,
-  time,
-  interview,
-  interviewers,
-  bookInterview,
-  cancelInterview,
-}) => {
+const Appointment = (props) => {
+  const { id, time, interview, interviewers, bookInterview, cancelInterview } =
+    props;
   const { mode, transition, back } = useVisualMode(interview ? SHOW : EMPTY);
 
   const save = (name, interviewer) => {
@@ -37,7 +32,6 @@ const Appointment = ({
     transition(SAVING);
     bookInterview(id, interview)
       .then(() => {
-        console.log("THEN");
         transition(SHOW);
       })
       .catch((error) => {
