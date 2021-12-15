@@ -28,7 +28,6 @@ export default function Application() {
         interviewers={interviewers}
         bookInterview={bookInterview}
         cancelInterview={cancelInterview}
-        // {...appointmentObj}
       />
     );
   });
