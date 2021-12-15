@@ -69,7 +69,7 @@ const Appointment = ({
       {mode === SHOW && (
         <Show
           student={interview.student}
-          interviewer={interview.interviewer.name}
+          interviewer={interview.interviewer ? interview.interviewer.name : ""}
           onEdit={() => transition(EDIT)}
           onDelete={() => {
             transition(CONFIRM);
@@ -99,7 +99,7 @@ const Appointment = ({
       {mode === EDIT && (
         <Form
           student={interview.student}
-          interviewer={interview.interviewer.id}
+          interviewer={interview.interviewer ? interview.interviewer.id : ""}
           interviewers={interviewers}
           onCancel={() => {
             back();
