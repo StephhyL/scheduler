@@ -3,7 +3,6 @@ import InterviewerList from "components/InterviewerList";
 import Button from "components/Button";
 
 const Form = (props) => {
-  console.log("props form line 7--->", props);
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
@@ -11,6 +10,7 @@ const Form = (props) => {
   const reset = () => {
     setStudent("");
     setInterviewer(null);
+    setError("");
   };
 
   const cancel = () => {
