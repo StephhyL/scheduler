@@ -2,9 +2,7 @@ import React, { Fragment } from "react";
 
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-
-import "index.scss";
-
+// Import other Components
 import Button from "components/Button";
 import DayListItem from "components/DayListItem";
 import DayList from "components/DayList";
@@ -18,7 +16,10 @@ import Confirm from "components/Appointment/Confirm";
 import Status from "components/Appointment/Status";
 import Error from "components/Appointment/Error";
 import Form from "components/Appointment/Form";
+// Import Stylesheet
+import "index.scss";
 
+//********** STORIES FOR BUTTON ********************/
 storiesOf("Button", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }],
@@ -35,6 +36,7 @@ storiesOf("Button", module)
     </Button>
   ));
 
+//******* STORIES FOR DAYLISTITEM **************** */
 storiesOf("DayListItem", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }],
@@ -46,6 +48,7 @@ storiesOf("DayListItem", module)
     <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} />
   ));
 
+//******* INFO & STORIES FOR DAYLIST ************* */
 const days = [
   {
     id: 1,
@@ -78,6 +81,7 @@ storiesOf("DayList", module)
     <DayList days={days} value={"Wednesday"} onChange={action("setDay")} />
   ));
 
+//****** INFO & STORIES FOR INTERVIEWERLISTITEM *********** */
 const interviewer = {
   // id: 1,
   name: "Sylvia Palmer",
@@ -111,6 +115,7 @@ storiesOf("InterviewerListItem", module)
     />
   ));
 
+//***** INFO FOR INTERVIEWERLIST & APPOINTMENT ************ */
 const interviewers = [
   { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
   { id: 2, name: "Tori Malcolm", avatar: "https://i.imgur.com/Nmx0Qxo.png" },
@@ -119,6 +124,7 @@ const interviewers = [
   { id: 5, name: "Sven Jones", avatar: "https://i.imgur.com/twYrpay.png" },
 ];
 
+//***** STORIES FOR INTERVIEWERLIST ************ */
 storiesOf("InterviewerList", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }],
@@ -134,6 +140,7 @@ storiesOf("InterviewerList", module)
     />
   ));
 
+//******* STORIES FOR APPOINTMENT ************ */
 storiesOf("Appointment", module)
   .addParameters({
     backgrounds: [{ name: "white", value: "#fff", default: true }],
