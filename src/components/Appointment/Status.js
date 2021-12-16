@@ -1,6 +1,6 @@
 import React from "react";
 
-/**Displays a 'status' message for when another action is completing*/
+/** Displays a 'status' message for when another action is completing*/
 const Status = (props) => {
   const { message } = props;
   return (
