@@ -15,11 +15,11 @@ Interview Scheduler allows users to book interview appointments. Users can creat
 
 ## Final Product
 
-!["Screenshot hightlighting the overall display, and appointment slot when empty and when creating a new form"](https://github.com/StephhyL/tweeter/blob/master/docs/phone-version-valid-tweet.png)
+!["Screenshot hightlighting the overall display, and appointment slot when empty and when creating a new form"](https://github.com/StephhyL/scheduler/blob/master/docs/overall_layout.png)
 
-!["Screenshot hightlighting the appointment form when filled in"](https://github.com/StephhyL/tweeter/blob/master/docs/phone-version-valid-tweet.png)
+!["Screenshot hightlighting the appointment form when filled in"](https://github.com/StephhyL/scheduler/blob/master/docs/form_completed.png)
 
-!["Screenshot hightlighting the appointment slot when hovered"](https://github.com/StephhyL/tweeter/blob/master/docs/phone-version-valid-tweet.png)
+!["Screenshot hightlighting the appointment slot when hovered"](https://github.com/StephhyL/scheduler/blob/master/docs/hovering_over_appt.png)
 
 ## Getting Started
 
