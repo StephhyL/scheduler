@@ -7,11 +7,12 @@ Interview Scheduler allows users to book interview appointments. Users can creat
 - Interview remaining for a day will update accordingly
 - Hovering over different elements provide styling changes for user feedback
 
-**Testing Features**:
+**Tested with**:
 
-- Unit testing with JEST
-- Unit testing with Storyboard
-- Integration testing with Cypress
+- Prettier - Static Testing
+- Storybook - Unit Testing
+- JEST Framework - Unit and Integration testing
+- Cypress - End-to-End testing
 
 ## Final Product
 
