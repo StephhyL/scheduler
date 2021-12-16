@@ -1,6 +1,8 @@
 import React from "react";
 
-const Status = ({ message }) => {
+/**Displays a 'status' message for when another action is completing*/
+const Status = (props) => {
+  const { message } = props;
   return (
     <main className="appointment__card appointment__card--status">
       <img

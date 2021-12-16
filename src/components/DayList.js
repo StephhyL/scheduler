@@ -1,7 +1,12 @@
 import React from "react";
+// Import other Component
 import DayListItem from "./DayListItem";
 
-const DayList = ({ days, value, onChange }) => {
+/** Displays the list of DayListItem components */
+const DayList = (props) => {
+  const { days, value, onChange } = props;
+
+  // an array of DayListItem Components
   const parsedDays = days.map((dayObj) => {
     return (
       <DayListItem

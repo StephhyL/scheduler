@@ -1,5 +1,6 @@
 import React from "react";
 
+/**Displays time above every appt slot */
 const Header = ({ time }) => {
   return (
     <header className="appointment__time">

@@ -1,7 +1,10 @@
 import React from "react";
+//import other Component
 import Button from "components/Button";
 
-const Confirm = ({ message, onConfirm, onCancel }) => {
+/** Displays confirm message along with confirm and cancel buttons*/
+const Confirm = (props) => {
+  const { message, onConfirm, onCancel } = props;
   return (
     <main className="appointment__card appointment__card--confirm">
       <h1 className="text--semi-bold">{message}</h1>

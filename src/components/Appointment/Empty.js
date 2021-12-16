@@ -1,6 +1,8 @@
 import React from "react";
 
-const Empty = ({ onAdd }) => {
+/**Displays an add "button"(img) when appt slot is free */
+const Empty = (props) => {
+  const { onAdd } = props;
   return (
     <main className="appointment__add">
       <img

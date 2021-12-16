@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-/**Hook responsible for inital render of page and subsequent renderings. Responsible for passing data to other components*/
+/** Hook returns an object with state, setDay, bookInterview, and cancelInterview. Also renders inital page*/
 export const useApplicationData = () => {
   const [state, setState] = useState({
     day: "",
@@ -10,18 +10,22 @@ export const useApplicationData = () => {
     interviewers: {},
   });
 
-  const getFreeSpots = (dayObj, appointments) => {
-    let apptIdArr = dayObj.appointments; // not the parameter
-    const emptyArr = apptIdArr.filter((apptId) => {
-      return !appointments[apptId].interview;
-    });
-    console.log("emptyArr--->", emptyArr);
-    const spots = emptyArr.length;
-    return spots;
+  /** Returns a number of available appt spots given state, list of appts */
+  const getAvailSpots = (state, appointments) => {
+    // an array with object where object day name matches state day
+    const targetObjInArr = state.days.filter((day) => day.name === state.day);
+    // an array with appointment id
+    const dayApptIdArr = targetObjInArr[0].appointments;
+    // the length of an array where corresponding appt's interview is null
+    const AvailSpots = dayApptIdArr.filter(
+      (apptId) => !appointments[apptId].interview
+    ).length;
+
+    return AvailSpots;
   };
 
   /**
-   * replaces the interview content at a specific appointment (id) and then updates the appointment list with the updated appointment created (sets new state)
+   * Returns a promise that sets new state: replaces the interview content at a specific appointment (id), updates the appt list and remaining interview spots
    */
   const bookInterview = (id, interview) => {
     const appointment = {
@@ -33,25 +37,20 @@ export const useApplicationData = () => {
       [id]: appointment,
     };
 
-    // taking a copy of the state.days
     const days = [...state.days];
-
-    // finds the target day obj in the array of days
-    let targetDayObj = {};
-    for (const dayObj of days) {
-      if (dayObj.name === state.day) {
-        targetDayObj = dayObj;
-      }
-    }
-    const spots = getFreeSpots(targetDayObj, appointments);
-    const targetId = targetDayObj.id;
-    const indexTargetDayObj = days.findIndex(
-      (element) => element.id === targetId
+    const dayIndex = state.days.findIndex((day) =>
+      day.appointments.includes(id)
     );
-    days[indexTargetDayObj].spots = spots;
+    const spots = getAvailSpots(state, appointments);
+    const newDay = {
+      ...days[dayIndex],
+      spots,
+    };
 
+    days[dayIndex] = newDay;
+
+    // makes an axios request to server to update information, then sets state
     const urlAppt = `api/appointments/${id}`;
-
     return axios.put(urlAppt, { interview: interview }).then(() => {
       setState({ ...state, appointments, days });
     });
@@ -68,25 +67,19 @@ export const useApplicationData = () => {
       [id]: appointment,
     };
 
-    // taking a copy of the state.days
     const days = [...state.days];
-
-    // finds the target day obj in the array of days
-    let targetDayObj = {};
-    for (const dayObj of days) {
-      if (dayObj.name === state.day) {
-        targetDayObj = dayObj;
-      }
-    }
-    // gets the number of spots given the targetDayObj and the "updated appointments object"
-    const spots = getFreeSpots(targetDayObj, appointments);
-    const targetId = targetDayObj.id;
-    const indexTargetDayObj = days.findIndex(
-      (element) => element.id === targetId
+    const dayIndex = state.days.findIndex((day) =>
+      day.appointments.includes(id)
     );
-    //updating the specific day object's spots
-    days[indexTargetDayObj].spots = spots;
+    const spots = getAvailSpots(state, appointments);
+    const newDay = {
+      ...days[dayIndex],
+      spots,
+    };
 
+    days[dayIndex] = newDay;
+
+    // makes an axios request to server to delete information, then sets state
     const urlDeleteAppt = `api/appointments/${id}`;
     return axios.delete(urlDeleteAppt).then(() => {
       setState({ ...state, appointments, days });
@@ -97,6 +90,7 @@ export const useApplicationData = () => {
     setState({ ...state, day });
   };
 
+  // upon first render, make axios requests to get inital data, and sets state
   useEffect(() => {
     const urlDays = `/api/days`;
     const urlAppointments = `/api/appointments`;
@@ -109,10 +103,6 @@ export const useApplicationData = () => {
     const promiseArr = [promise1, promise2, promise3];
 
     Promise.all(promiseArr).then((all) => {
-      // console.log("promise1--->", all[0].data);
-      // console.log("promise2--->", all[1].data);
-      // console.log("promise3--->", all[2].data);
-      // const [first, second] = all;
       setState((prev) => ({
         ...prev,
         days: all[0].data,
@@ -120,13 +110,6 @@ export const useApplicationData = () => {
         interviewers: all[2].data,
       }));
     });
-
-    // console.log("in use effect!");
-    // axios.get(urlDays)
-    //   .then((response) => {
-    //     console.log("response.data----->", response.data);
-    //     setDays(response.data);
-    //   })
   }, []);
 
   return { state, setDay, bookInterview, cancelInterview };

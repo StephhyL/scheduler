@@ -2,8 +2,12 @@ import React from "react";
 import "components/InterviewerListItem.scss";
 import className from "classnames";
 
-const InterviewerListItem = ({ name, avatar, setInterviewer, selected }) => {
-  let interviewClass = className("interviewers__item", {
+/** Displays the avatar and name of the interviewers depending on class */
+const InterviewerListItem = (props) => {
+  const { name, avatar, setInterviewer, selected } = props;
+
+  // assigns different classes based on incoming props. Classes associated with styling.
+  const interviewClass = className("interviewers__item", {
     "interviewers__item--selected": selected,
   });
 

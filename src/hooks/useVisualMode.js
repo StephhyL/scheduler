@@ -1,14 +1,13 @@
 import { useState } from "react";
 
+/** Custom hook that returns mode, transition function, and back function */
 const useVisualMode = (initalMode) => {
   const [mode, setMode] = useState(initalMode);
   const [history, setHistory] = useState([initalMode]);
 
-  // console.log("HISTORY OUTSIDE---->", history)
-
+  /** Sets mode and history based on incoming mode, and replace value */
   const transition = (newMode, replace = false) => {
-    // history.push(newMode);
-    // console.log("history inside transition-->", history)
+    // if replace=true, sets history with previous hx (minus last item in array), plus incoming mode, and sets mode to incoming mode
     if (replace) {
       setHistory((prevHistory) => {
         const copyOfHistory = [...prevHistory];
@@ -17,43 +16,26 @@ const useVisualMode = (initalMode) => {
         setMode(newMode);
         return copyOfHistory;
       });
-      // history[history.length - 1] = newMode;
-      // setMode(newMode);
+      // Else, sets history with previous hx plus incoming mode, and sets mode to incoming mode
     } else {
       setHistory(() => {
         setMode(newMode);
         return [...history, newMode];
       });
-      // setHistory([...history, newMode]);
-      // setMode(newMode);
     }
   };
 
+  /** Set mode and history to the previous mode and history*/
   const back = () => {
+    // only proceeds if there is a previous mode
     if (history.length > 1) {
       setHistory((prevHistory) => {
-        // console.log("prevHistory--->", prevHistory)
         const copyOfHistory = [...prevHistory];
         copyOfHistory.pop();
-        // console.log("copyOfHistory--->", copyOfHistory)
-
         const prevMode = copyOfHistory[copyOfHistory.length - 1];
-        // console.log("prevMode--->", prevMode)
         setMode(prevMode);
         return copyOfHistory;
       });
-      // console.log("prevHistory---->", prevHistory)
-      // const copyOfHistory = [prevHistory];
-      // console.log("copyOfHistory", copyOfHistory)
-      // copyOfHistory.pop();
-      // // console.log("history--->", history)
-      // let prevMode = copyOfHistory[history.length - 1];
-      // setMode(prevMode);
-      // return copyOfHistory;
-
-      //history.pop();
-      // let prevMode = history[history.length - 1];
-      // setMode(prevMode)
     }
   };
 

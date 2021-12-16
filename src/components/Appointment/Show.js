@@ -1,6 +1,9 @@
 import React from "react";
 
-const Show = ({ student, interviewer, onEdit, onDelete }) => {
+/** Displays student, interviewer when appt is booked, also displays edit/delete "icons" when component is hovered */
+const Show = (props) => {
+  const { student, interviewer, onEdit, onDelete } = props;
+
   return (
     <main className="appointment__card appointment__card--show">
       <section className="appointment__card-left">
@@ -12,6 +15,7 @@ const Show = ({ student, interviewer, onEdit, onDelete }) => {
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
+          {/**img/icons that appear when Show Component is hovered, performs action (onEdit/onDelete) when clicked*/}
           <img
             className="appointment__actions-button"
             src="images/edit.png"
