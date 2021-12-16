@@ -4,7 +4,7 @@ describe("Appointments", () => {
 
     cy.visit("/");
 
-    cy.contains("Monday");
+    cy.contains("Monday").click();
   });
 
   it("should book an interview", () => {
